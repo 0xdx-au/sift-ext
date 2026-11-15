@@ -1,0 +1,25 @@
+name: Chromium installed-extension QA
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  installed-browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Source gates
+        run: |
+          npm run check
+          npm test
+      - name: Install isolated browser harness
+        run: npm install --no-save --ignore-scripts --no-audit --no-fund playwright@1.64.1
+      - name: Install reproducible Playwright Chromium
+        run: npx --no-install playwright install --with-deps chromium
+      - name: Run actual installed-extension network tests
+        run: npm run test:browser
