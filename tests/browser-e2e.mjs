@@ -72,8 +72,11 @@ try {
   };
   const compiled=compileForChromium(policy,{limit:20}).rules;
   const result=await worker.evaluate(async(rules)=>{
-    const {installDynamicRules}=await import(chrome.runtime.getURL('src/intelligence/install.mjs'));
-    return installDynamicRules(chrome.declarativeNetRequest,rules);
+    const old=await chrome.declarativeNetRequest.getDynamicRules();
+    await chrome.declarativeNetRequest.updateDynamicRules({removeRuleIds:old.map(r=>r.id),addRules:rules});
+    const current=await chrome.declarativeNetRequest.getDynamicRules();
+    if(current.length!==rules.length)throw Error('DNR browser did not retain compiled rules');
+    return {installed:current.length};
   },compiled);
   assert.equal(result.installed,1);
   const dynamicBlocked='http://tracker.example/sift-test-image';
