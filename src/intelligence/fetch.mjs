@@ -61,7 +61,8 @@ export async function acquireVerifiedRelease(pin, previous={}, opts={}) {
     let proof;
     try { proof = new TextDecoder('utf-8',{fatal:true}).decode(proofBytes); }
     catch { throw new Error('SIFT: signature metadata encoding invalid'); }
-    return await verifyRelease(payload,proof,pin,previous,opts.now ?? Date.now());
+    const verified = await verifyRelease(payload,proof,pin,previous,opts.now ?? Date.now());
+    return { ...verified, rawBytes: payload, signatureText: proof };
   } finally {
     clearTimeout(timeout);
     ctl.abort();
