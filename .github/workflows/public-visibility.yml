@@ -1,0 +1,33 @@
+name: Public visibility policy
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '17 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check anonymous repository visibility
+        env:
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --retry 2 --retry-delay 2 \
+            --connect-timeout 10 --max-time 30 \
+            -H 'Accept: application/vnd.github+json' \
+            "https://api.github.com/repos/${REPO}" > /tmp/repo.json
+          python3 - <<'PY'
+          import json
+          with open('/tmp/repo.json', encoding='utf-8') as f:
+              repo = json.load(f)
+          assert repo.get('private') is False and repo.get('visibility') == 'public', 'SIFT EXT visibility is not public'
+          print('SIFT EXT is publicly accessible')
+          PY
