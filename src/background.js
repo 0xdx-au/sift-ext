@@ -1,4 +1,6 @@
 import { readProtectionStatus, setProtectionEnabled } from './protection/state.mjs';
+import { reconcileProtection } from './protection/lifecycle.mjs';
+import { SIGNING_PIN } from './intelligence/trust.mjs';
 
 const api = {
   dnr: chrome.declarativeNetRequest,
@@ -14,10 +16,7 @@ function serial(task) {
 }
 
 async function reconcile() {
-  await api.local.setAccessLevel({ accessLevel: 'TRUSTED_CONTEXTS' });
-  await api.session.setAccessLevel({ accessLevel: 'TRUSTED_CONTEXTS' });
-  const saved = await api.local.get('enabled');
-  return setProtectionEnabled(api, saved.enabled !== false);
+  return reconcileProtection(api, SIGNING_PIN);
 }
 chrome.runtime.onInstalled.addListener(() => {
   serial(reconcile).catch((error) => console.error('SIFT: reconciliation failed', error.message));
