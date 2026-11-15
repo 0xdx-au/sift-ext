@@ -1,11 +1,14 @@
 <p align="center">
-  <img src="docs/media/sift-hero.svg" width="100%" alt="ADMINE SIFT EXT. Less noise. More signal. An auditable browser protection project, currently an engineering preview." />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/media/sift-hero.svg"/>
+    <img src="docs/media/sift-hero-light.svg" width="100%" alt="ADMINE SIFT EXT. Original contour-A brand mark, charcoal and ivory editorial typography, and quiet topographic linework."/>
+  </picture>
 </p>
 
 <p align="center">
   <a href="https://github.com/0xdx-au/sift-ext/actions/workflows/client-tests.yml"><img alt="Source checks, engineering branch" src="https://github.com/0xdx-au/sift-ext/actions/workflows/client-tests.yml/badge.svg?branch=engineering%2Fp0-p1-client-20261115"></a>
   <a href="https://github.com/0xdx-au/sift-ext/actions/workflows/browser-e2e.yml"><img alt="Installed Chromium QA, engineering branch" src="https://github.com/0xdx-au/sift-ext/actions/workflows/browser-e2e.yml/badge.svg?branch=engineering%2Fp0-p1-client-20261115"></a>
-  <img alt="Status: engineering preview" src="https://img.shields.io/badge/status-engineering_preview-38bdaa?style=flat-square">
+  <img alt="Status: engineering preview" src="https://img.shields.io/badge/status-engineering_preview-696b65?style=flat-square">
   <img alt="License: rights reserved" src="https://img.shields.io/badge/license-rights_reserved-64748b?style=flat-square">
 </p>
 
@@ -22,7 +25,7 @@
 
 ## What is SIFT EXT?
 
-**A quiet browser-side filtering client with a verifiable intelligence pipeline.** SIFT EXT is the public-facing half of ADMINE's SIFT project: one part local request filtering, one part careful link cleanup, and one part signed policy verification.
+**An ADMINE browser-side filtering instrument with a verifiable intelligence pipeline.** SIFT EXT is the public-facing half of ADMINE's SIFT project: one part local request filtering, one part careful link cleanup, and one part signed policy verification.
 
 It is built for **inspection, predictable behaviour and honest results**. No mystery counters. No fabricated protection score. No pretending that a rule blocked something when the browser never enforced it.
 
@@ -44,7 +47,10 @@ The point is not to block the most requests. It is to **block the right requests
 ## Trust is the feature
 
 <p align="center">
-  <img src="docs/media/sift-flow.svg" alt="Trust path: private constrained feed compiler, offline signature, planned public signed feed and public SIFT EXT verification before browser DNR rules." width="100%"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/media/sift-flow.svg"/>
+    <img src="docs/media/sift-flow-light.svg" alt="SIFT trust path: ingest privately, sign offline, distribute signed data (planned), verify and enforce in the browser." width="100%"/>
+  </picture>
 </p>
 
 Two repositories, deliberately separated:
