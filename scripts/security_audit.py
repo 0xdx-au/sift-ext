@@ -8,7 +8,7 @@ from pathlib import Path
 root=Path(__file__).resolve().parents[1]
 files=[s for s in subprocess.check_output(["git","ls-files","-z"],cwd=root).decode().split("\0") if s]
 assert files, "No tracked files"
-pin=re.compile(r"^[\w.-]+/[\w.-]+@[0-9a-f]{40}$")
+pin=re.compile(r"^[\w.-]+/[\w.-]+(?:/[\w.-]+)*@[0-9a-f]{40}$")
 secret_file=re.compile(r"(^|/)(?:\.env(?:$|\.)|secrets?/|private/)|\.(?:pem|key|p8|p12|pfx)$",re.I)
 for path in files:
     assert not secret_file.search(path), "Secret-like tracked path: "+path
