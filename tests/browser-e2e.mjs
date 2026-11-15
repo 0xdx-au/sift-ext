@@ -114,13 +114,38 @@ try {
   await popup.locator('#clean').click();
   assert.equal(await popup.locator('#link').inputValue(),'https://example.org/?q=secure');
   report('popup-resume-and-manual-clean','pass');
-  // Real installed-extension screenshot with only deterministic fixture data.
-  // No network browsing history or signing secrets are captured.
+  // Actual installed-browser screenshots use deterministic fixture URLs, not private history.
   await mkdir('artifacts',{recursive:true});
-  await popup.locator('body').screenshot({
-    path:'artifacts/sift-popup-dark.png',animations:'disabled'
+  await popup.emulateMedia({colorScheme:'dark'});
+  let rendered=await popup.evaluate(async()=>{
+    const mark=document.querySelector('.brand-mark img');
+    await mark.decode();
+    return {background:getComputedStyle(document.body).backgroundColor,
+      accent:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),
+      mark:mark.currentSrc,markWidth:mark.naturalWidth};
   });
-  report('popup-screenshot','captured','artifacts/sift-popup-dark.png');
+  assert.equal(rendered.background,'rgb(16, 16, 16)','ADMINE dark canvas mismatch');
+  assert.equal(rendered.accent,'#c7a86b','ADMINE dark accent mismatch');
+  assert.ok(rendered.mark.endsWith('/src/brand/admine-mark.svg'));
+  assert.ok(rendered.markWidth>0,'The actual ADMINE mark failed to decode');
+  await popup.locator('body').screenshot({path:'artifacts/sift-popup-dark.png',animations:'disabled'});
+  report('ADMINE-popup-dark-brand','pass');
+
+  await popup.emulateMedia({colorScheme:'light'});
+  rendered=await popup.evaluate(async()=>{
+    const mark=document.querySelector('.brand-mark img');
+    await mark.decode();
+    return {background:getComputedStyle(document.body).backgroundColor,
+      accent:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),
+      mark:mark.currentSrc,markWidth:mark.naturalWidth};
+  });
+  assert.equal(rendered.background,'rgb(245, 244, 240)','ADMINE light canvas mismatch');
+  assert.equal(rendered.accent,'#80591f','ADMINE light accent mismatch');
+  assert.ok(rendered.mark.endsWith('/src/brand/admine-mark-light.svg'));
+  assert.ok(rendered.markWidth>0);
+  await popup.locator('body').screenshot({path:'artifacts/sift-popup-light.png',animations:'disabled'});
+  report('ADMINE-popup-light-brand','pass');
+  await popup.emulateMedia({colorScheme:'dark'});
 
   // Test-only disposable signer: this does not change the package's null trust pin,
   // store any private key, or contact the live SIFT endpoint.
