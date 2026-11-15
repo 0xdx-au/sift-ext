@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 const json = async (path) => JSON.parse(await readFile(new URL('../' + path, import.meta.url), 'utf8'));
 const manifest = await json('manifest.json');
 assert.equal(manifest.manifest_version, 3);
+assert.ok(Number(manifest.minimum_chrome_version) >= 156, 'Disallow unsupported legacy Chromium runtimes');
 assert.deepEqual(manifest.permissions, ['declarativeNetRequest','storage','activeTab']);
 assert.equal(manifest.host_permissions, undefined);
 assert.equal(manifest.externally_connectable, undefined);

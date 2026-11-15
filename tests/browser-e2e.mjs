@@ -44,6 +44,7 @@ try {
     args:['--disable-extensions-except=' + resolve('.'),'--load-extension=' + resolve('.')],
     ignoreHTTPSErrors:false
   });
+  report('browser-version','observed',context.browser().version());
   let workers=context.serviceWorkers();
   if(!workers.length)workers=[await context.waitForEvent('serviceworker',{timeout:20000})];
   const worker=workers[0];

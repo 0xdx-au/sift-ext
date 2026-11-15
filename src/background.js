@@ -14,6 +14,8 @@ function serial(task) {
 }
 
 async function reconcile() {
+  await api.local.setAccessLevel({ accessLevel: 'TRUSTED_CONTEXTS' });
+  await api.session.setAccessLevel({ accessLevel: 'TRUSTED_CONTEXTS' });
   const saved = await api.local.get('enabled');
   return setProtectionEnabled(api, saved.enabled !== false);
 }
