@@ -30,10 +30,14 @@ The [visibility audit](.github/workflows/public-visibility.yml) checks public ac
 
 ## Development and test
 
-Requires Node.js 22+. Run `npm run check` and `npm test`. These validate the manifest, static DNR resource, link cleaning, signature verification and installer/compiler fixtures. CI passing is **not** the same as Chrome, Brave, Edge or Safari installed-extension testing.
+Requires Node.js 26 LTS. Run `npm run check` and `npm test`. These validate the manifest, static DNR resource, link cleaning, signature verification and installer/compiler fixtures. CI passing is **not** the same as Chrome, Brave, Edge or Safari installed-extension testing.
 
 To inspect the source-level Chromium starter, review `manifest.json`, `rules/starter.json` and `src/`. The current blocker layer ships as bundled rules; signing and public distribution require approved offline key custody and independently verified `admine.au` feed bytes. No private GitHub credentials are ever required by a browser.
 
 The source is visible for independent review, but use, modification and commercial distribution permissions remain subject to [LICENSE](LICENSE). Browser store installation packages and published screenshots are not yet provided.
 
 See [docs/BASELINE.md](docs/BASELINE.md), [docs/PROTOCOL.md](docs/PROTOCOL.md), and the tracked [completion issues](https://github.com/0xdx-au/sift-ext/issues) for limits and next gates.
+
+### CI runtime and dependency policy
+
+Use Node.js 26 Active LTS for source and browser harness checks. GitHub Actions use SHA-pinned `actions/checkout` v7.0.1 and `actions/setup-node` v7.1.0 (their own supported Node 24 action runtime is distinct from the project's Node 26 test runtime). The installed Chromium harness uses an exact Playwright 1.65.1 version. Dependabot reviews GitHub Actions and npm dependencies weekly; action pins only change through reviewed PRs.
