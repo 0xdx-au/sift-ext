@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="540" viewBox="0 0 1400 540" role="img" aria-labelledby="title desc">
+<title id="title">ADMINE / SIFT EXT — Less noise. More signal.</title>
+<desc id="desc">ADMINE's original contour-A mark, the SIFT EXT wordmark, topographic linework and an understated engineering-preview label. Original ADMINE editorial identity with ivory ground.</desc>
+<rect width="1400" height="540" fill="#f5f4f0"/>
+<path d="M48 46 H1352 M48 489 H1352" stroke="#cdc9bf" stroke-width="1"/>
+<g clip-path="url(#field)"><path d="M720 282 C840 132 960 237 1080 147 S1300 182 1470 97" stroke="#797162" stroke-opacity="0.17" stroke-width="1.1" fill="none"/>
+<path d="M720 313 C840 163 960 268 1080 178 S1300 213 1470 128" stroke="#797162" stroke-opacity="0.18300000000000002" stroke-width="1.1" fill="none"/>
+<path d="M720 344 C840 194 960 299 1080 209 S1300 244 1470 159" stroke="#797162" stroke-opacity="0.196" stroke-width="1.1" fill="none"/>
+<path d="M720 375 C840 225 960 330 1080 240 S1300 275 1470 190" stroke="#797162" stroke-opacity="0.20900000000000002" stroke-width="1.1" fill="none"/>
+<path d="M720 406 C840 256 960 361 1080 271 S1300 306 1470 221" stroke="#797162" stroke-opacity="0.222" stroke-width="2" fill="none"/>
+<path d="M720 437 C840 287 960 392 1080 302 S1300 337 1470 252" stroke="#797162" stroke-opacity="0.23500000000000001" stroke-width="1.1" fill="none"/>
+<path d="M720 468 C840 318 960 423 1080 333 S1300 368 1470 283" stroke="#797162" stroke-opacity="0.248" stroke-width="1.1" fill="none"/>
+<path d="M720 499 C840 349 960 454 1080 364 S1300 399 1470 314" stroke="#797162" stroke-opacity="0.261" stroke-width="1.1" fill="none"/>
+<path d="M720 530 C840 380 960 485 1080 395 S1300 430 1470 345" stroke="#797162" stroke-opacity="0.274" stroke-width="1.1" fill="none"/></g>
+<defs><clipPath id="field"><rect x="694" y="90" width="706" height="384"/></clipPath></defs>
+<text x="54" y="87" fill="#80591f" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15" letter-spacing="3">ADMINE / INDEPENDENT DIGITAL LABORATORY</text>
+<text x="1350" y="86" fill="#696b65" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" letter-spacing="2">PROJECT / 01</text>
+<g transform="translate(66 143) scale(.86)"><defs><clipPath id="terrain-a"><path fill-rule="evenodd" d="M116 22 H140 L240 228 H191 L169 181 H87 L65 228 H16 Z M128 88 L149 139 H107 Z"/></clipPath></defs><path d="M116 22 H140 L240 228 H191 L169 181 H87 L65 228 H16 Z M128 88 L149 139 H107 Z" fill-rule="evenodd" fill="#101516"/><g clip-path="url(#terrain-a)" fill="none" stroke="#263b3e" stroke-width="3.5" stroke-linecap="round"><path d="M-20 195 C30 155 48 215 90 172 S125 112 173 141 S241 185 278 132"/><path d="M-15 177 C28 141 46 200 84 155 S128 91 170 117 S236 164 273 111"/><path d="M-10 159 C26 123 46 185 81 137 S128 76 172 98 S237 139 276 87"/><path d="M-4 140 C24 110 45 160 80 113 S133 64 172 77 S239 115 277 67"/><path d="M8 122 C28 90 50 137 82 91 S132 46 172 57 S240 97 277 44"/><path d="M20 102 C38 70 60 115 92 70 S133 28 172 38 S240 78 277 25"/><path d="M34 82 C51 51 73 94 104 50 S143 13 172 21 S235 54 275 3"/></g><circle cx="196" cy="203" r="22" fill="#f5f4f0" stroke="#087963" stroke-width="4"/><circle cx="196" cy="203" r="13" fill="none" stroke="#20211f" stroke-width="2.6"/><circle cx="196" cy="203" r="5.3" fill="#087963"/><path d="M196 169V175 M196 231V237 M162 203H168 M224 203H230" stroke="#087963" stroke-width="2.4" fill="none"/></g>
+<path d="M324 175 V412" stroke="#cdc9bf" stroke-width="1"/>
+<text x="374" y="284" fill="#20211f" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="121" font-weight="500" letter-spacing="-9">SIFT</text>
+<text x="382" y="334" fill="#80591f" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="36" letter-spacing="9">EXT</text>
+<text x="378" y="385" fill="#555750" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="19">Browser-side filtering. Verifiable intelligence.</text>
+<circle cx="135" cy="456" r="4.2" fill="#087963"/>
+<text x="152" y="461" fill="#20211f" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" letter-spacing="2">LESS NOISE. MORE SIGNAL.</text>
+<rect x="1132" y="442" width="218" height="30" fill="#eeede8" stroke="#cdc9bf" stroke-width="1"/>
+<text x="1241" y="462" fill="#696b65" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1.4">ENGINEERING PREVIEW</text>
+<text x="54" y="518" fill="#696b65" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="2">ADMINE.AU</text>
+<text x="1350" y="518" fill="#696b65" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="2">VERIFY / COMPILE / ENFORCE</text>
+</svg>

@@ -1,43 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="380" viewBox="0 0 1400 380" role="img" aria-labelledby="title desc">
-<title id="title">SIFT EXT trust boundaries</title><desc id="desc">A four-stage architecture diagram: private source ingestion, offline signing, public signed release, and a public client that validates before compiling browser rules. Signed distribution is not yet live.</desc>
-<defs>
- <linearGradient id="surface" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0c151a"/><stop offset="1" stop-color="#112624"/></linearGradient>
- <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0 1 L7 4 L0 7" fill="none" stroke="#70d6c1" stroke-width="1.5"/></marker>
-</defs>
-<rect x="1" y="1" width="1398" height="378" rx="16" fill="url(#surface)" stroke="#34615b" stroke-width="2"/>
-<text x="42" y="46" font-family="Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="3" fill="#7ce2cc">THE TRUST PATH</text>
-<text x="42" y="76" font-family="Arial, sans-serif" font-size="17" fill="#b6ccc7">Data may be public. Authority comes from a verified signature.</text>
-<g font-family="Arial, sans-serif">
- <rect x="38" y="117" width="282" height="168" rx="15" fill="#142529" stroke="#4f7971"/>
- <text x="61" y="145" fill="#84d7c6" font-size="13" font-weight="700" letter-spacing="2">01 / PRIVATE</text>
- <text x="61" y="189" fill="#f4faf8" font-size="24" font-weight="700">Feed compiler</text>
- <text x="61" y="221" fill="#aebfbc" font-size="16">Constrained rules, attribution,</text>
- <text x="61" y="245" fill="#aebfbc" font-size="16">coverage checks</text>
-
- <rect x="385" y="117" width="282" height="168" rx="15" fill="#142529" stroke="#4f7971"/>
- <text x="408" y="145" fill="#84d7c6" font-size="13" font-weight="700" letter-spacing="2">02 / OFFLINE</text>
- <text x="408" y="189" fill="#f4faf8" font-size="24" font-weight="700">Release signing</text>
- <text x="408" y="221" fill="#aebfbc" font-size="16">Ed25519 signing identity</text>
- <text x="408" y="245" fill="#aebfbc" font-size="16">kept outside GitHub + CI</text>
-
- <rect x="732" y="117" width="282" height="168" rx="15" fill="#142529" stroke="#b49b63" stroke-dasharray="8 6"/>
- <text x="755" y="145" fill="#e4c48d" font-size="13" font-weight="700" letter-spacing="2">03 / PLANNED</text>
- <text x="755" y="189" fill="#f4faf8" font-size="24" font-weight="700">Signed public feed</text>
- <text x="755" y="221" fill="#aebfbc" font-size="16">Versioned release bytes</text>
- <text x="755" y="245" fill="#aebfbc" font-size="16">Not deployed yet</text>
-
- <rect x="1079" y="117" width="282" height="168" rx="15" fill="#15312f" stroke="#69d3bc" stroke-width="2"/>
- <text x="1102" y="145" fill="#84d7c6" font-size="13" font-weight="700" letter-spacing="2">04 / PUBLIC CLIENT</text>
- <text x="1102" y="189" fill="#f4faf8" font-size="24" font-weight="700">SIFT EXT</text>
- <text x="1102" y="221" fill="#aebfbc" font-size="16">Verify, compile, apply</text>
- <text x="1102" y="245" fill="#aebfbc" font-size="16">Chromium DNR rules</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="424" viewBox="0 0 1400 424" role="img" aria-labelledby="title desc">
+<title id="title">SIFT EXT / trust path</title>
+<desc id="desc">An ADMINE editorial architecture diagram showing four steps: ingest approved upstream feeds privately, sign offline, distribute signed releases once deployed, and verify before enforcing browser rules. Public release delivery is not deployed.</desc>
+<rect width="1400" height="424" fill="#101010"/>
+<path d="M46 44 H1354 M46 366 H1354" stroke="#44433e" stroke-width="1"/>
+<text x="46" y="88" fill="#c7a86b" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15" letter-spacing="3">SYSTEM / TRUST BOUNDARIES</text>
+<text x="1351" y="88" text-anchor="end" fill="#8e8b84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14">THE SIGNATURE IS THE TRUST ANCHOR</text>
+<g>
+<rect x="46" y="131" width="308" height="200" fill="#171717" stroke="#44433e" stroke-width="1"/>
+<text x="68" y="167" fill="#8e8b84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15" letter-spacing="2">01 / INGEST</text>
+<text x="68" y="225" fill="#e9e7e1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="22" font-weight="500">Approved upstream sources</text>
+<path d="M68 252 H332" stroke="#44433e"/>
+<text x="68" y="282" fill="#aaa69f" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15">Private pipeline</text>
 </g>
-<g stroke="#70d6c1" fill="none" stroke-width="2.5" marker-end="url(#arrow)">
- <path d="M328 201 H377"/>
- <path d="M675 201 H724"/>
- <path d="M1022 201 H1071" stroke-dasharray="5 6"/>
+<g>
+<rect x="387" y="131" width="308" height="200" fill="#171717" stroke="#44433e" stroke-width="1"/>
+<text x="409" y="167" fill="#8e8b84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15" letter-spacing="2">02 / SIGN</text>
+<text x="409" y="225" fill="#e9e7e1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="22" font-weight="500">Ed25519 / offline custody</text>
+<path d="M409 252 H673" stroke="#44433e"/>
+<text x="409" y="282" fill="#aaa69f" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15">Outside GitHub + CI</text>
 </g>
-<path d="M40 317 H1360" stroke="#40665e"/>
-<text x="42" y="345" font-family="Arial, sans-serif" font-size="16" fill="#95c8bc">VALID SIGNATURE + VALID POLICY + APPROVED KEY</text>
-<text x="1359" y="345" text-anchor="end" font-family="Arial, sans-serif" font-size="16" fill="#e3bc78">Otherwise: no dynamic update</text>
+<g>
+<rect x="728" y="131" width="308" height="200" fill="#171717" stroke="#44433e" stroke-width="1"/>
+<text x="750" y="167" fill="#c7a86b" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15" letter-spacing="2">03 / DISTRIBUTE</text>
+<text x="750" y="225" fill="#e9e7e1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="22" font-weight="500">Signed public release</text>
+<path d="M750 252 H1014" stroke="#44433e"/>
+<text x="750" y="282" fill="#aaa69f" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15">Not yet deployed</text>
+</g>
+<g>
+<rect x="1069" y="131" width="308" height="200" fill="#171717" stroke="#44433e" stroke-width="1"/>
+<text x="1091" y="167" fill="#8e8b84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15" letter-spacing="2">04 / ENFORCE</text>
+<text x="1091" y="225" fill="#e9e7e1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="22" font-weight="500">Verify first. Then DNR.</text>
+<path d="M1091 252 H1355" stroke="#44433e"/>
+<text x="1091" y="282" fill="#aaa69f" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15">Public browser client</text>
+</g>
+<g stroke="#c7a86b" stroke-width="1.4" fill="none"><path d="M355 230 H380 l-7 -5 m7 5 l-7 5"/><path d="M696 230 H722 l-7 -5 m7 5 l-7 5"/><path d="M1037 230 H1063 l-7 -5 m7 5 l-7 5"/></g>
+<text x="46" y="400" fill="#aaa69f" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14">Invalid signature / expired release / unsupported policy</text>
+<text x="1352" y="400" text-anchor="end" fill="#c7a86b" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14">NO DYNAMIC UPDATE</text>
 </svg>
