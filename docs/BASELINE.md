@@ -19,7 +19,7 @@
 ## Ship blockers
 
 1. Reconcile against independently validated prior extension package; do not overwrite current published behaviour blindly.
-2. Import a public, independently reviewed protocol implementation; provision only an authorised public Ed25519 pin after offline key custody.
+2. Independently review the newly added public protocol verifier/compiler and test vectors; provision only an authorised public Ed25519 pin after offline key custody.
 3. Add staged signed release ingestion, validation, DNR installation and recovery.
 4. Implement and independently test exclusions and automatic link cleaning if safe, then run real browser installs.
 5. Configure actual GitHub rulesets; check workflow statuses and installed browser coverage.

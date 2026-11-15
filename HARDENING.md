@@ -29,4 +29,4 @@ Current posture: source-visible, ADMINE rights reserved. This preserves the abil
 
 ## Known release gaps
 
-As of the setup commit, this GitHub repository hosts policy/CI scaffolding; the full Link Signal v1.4.2 extension source has **not** yet been synchronised to GitHub. The signed public feed has not been deployed or provisioned with a production key. Do not describe this as a store-ready release.
+As of the 2026-11-15 engineering branch, a new conservative SIFT EXT source starter and its tests exist; the earlier packaged Link Signal v1.4.2 source has **not** been independently reconciled and must not be presumed equivalent. The signed public feed has not been deployed or provisioned with a production key. Do not describe this as a store-ready release.
