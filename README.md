@@ -41,3 +41,7 @@ See [docs/BASELINE.md](docs/BASELINE.md), [docs/PROTOCOL.md](docs/PROTOCOL.md), 
 ### CI runtime and dependency policy
 
 Use Node.js 26 Active LTS for source and browser harness checks. GitHub Actions use SHA-pinned `actions/checkout` v7.0.1 and `actions/setup-node` v7.1.0 (their own supported Node 24 action runtime is distinct from the project's Node 26 test runtime). The installed Chromium harness uses an exact Playwright 1.65.1 version. Dependabot reviews GitHub Actions and npm dependencies weekly; action pins only change through reviewed PRs.
+
+### Current browser support floor
+
+The Chromium manifest requires version 156 or newer (the November 2026 extended-stable baseline). This is a **minimum installation gate**, not evidence that Chrome, Edge and Brave all behave identically. Actual QA currently covers Playwright Chromium only; other browsers require separate installed-version testing before being advertised as supported. Session and local extension storage are restricted to trusted extension contexts during lifecycle reconciliation.

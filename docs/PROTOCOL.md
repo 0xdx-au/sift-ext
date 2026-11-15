@@ -8,4 +8,8 @@ The extension may consume signed release data only after an authorised public ve
 - Existing state anchors both sequence and SHA-256: same-sequence substitution is rejected unless the digest matches; lower sequences are always rejected.
 - Budgets: 8 MB signed payload, 2,048-character proof, 31-day maximum validity, bounded lists and rule groups.
 
-`src/intelligence/verify.mjs` is an independent public verifier with test-only disposable signing fixtures. It is not yet wired to remote acquisition, DNR installation, persistent rollback state or a production signing pin. The current client therefore uses packaged rules only; live signed feed protection remains **not provisioned**.
+The public verifier, bounded downloader, policy compiler and staged installation coordinator now have unit tests. The coordinator keeps a local last-accepted policy snapshot and a durable installation journal, allowing an interrupted replacement to restore the prior accepted DNR rules. Startup reconciliation invokes the journal recovery path.
+
+**This does not enable live remote feed updates.** No production public key is pinned, there is no approved signing identity or public CDN release, and the update coordinator is deliberately not scheduled or callable through the popup. The current client uses only packaged starter rules. Real-browser QA for signed-update installation, quota failures and restart recovery must still pass before automatic updates are enabled.
+
+The local sequence/hash anchor protects ordinary update flows, not reinstalls, profile restoration, storage deletion or an attacker who can alter privileged extension storage. Independent key lifecycle and recovery reviews remain mandatory.
