@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p8
+*.p12
+*.pfx
+secrets/
+private/
+node_modules/
+coverage/
+test-results/
+*.log
+.DS_Store
