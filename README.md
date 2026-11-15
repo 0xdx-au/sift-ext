@@ -14,7 +14,7 @@ Public browser-extension client for [ADMINE](https://admine.au) SIFT.
 
 Chrome, Edge and Brave share a Manifest V3 client with browser-specific validation; Safari requires a separate tested adapter. This is browser request filtering, not network-wide protective DNS.
 
-**Current status:** A conservative source-level Manifest V3 starter has been added on an engineering branch. It provides one bundled, restricted third-party network rule, an actual on/off control, and optional manual tracking-link cleanup. A standalone public Ed25519 release verifier and target compiler have tests, but the live feed is **not provisioned**, the installer is **not connected**, and no installed-browser validation or store publication has been performed. This is not a verified copy of the earlier packaged Link Signal extension.
+**Current status:** A conservative source-level Manifest V3 starter has been added on an engineering branch. It provides one bundled, restricted third-party network rule, an actual on/off control, and optional manual tracking-link cleanup. An independently tested public Ed25519 verifier, policy compiler and signed-update coordinator now exist; real Chromium tests cover the starter and signed fixture path. The live feed is **not provisioned**, automatic updates are disabled, and no store publication has occurred. This is not a verified copy of the earlier packaged Link Signal extension.
 
 ## Commercial rights
 
@@ -45,3 +45,7 @@ Use Node.js 26 Active LTS for source and browser harness checks. GitHub Actions 
 ### Current browser support floor
 
 The Chromium manifest requires version 156 or newer (the November 2026 extended-stable baseline). This is a **minimum installation gate**, not evidence that Chrome, Edge and Brave all behave identically. Actual QA currently covers Playwright Chromium only; other browsers require separate installed-version testing before being advertised as supported. Session and local extension storage are restricted to trusted extension contexts during lifecycle reconciliation.
+
+### Signed policy storage and recovery
+
+The signed-release journal retains verifiable payload bytes and the detached signature rather than treating cached DNR rules as trusted. On startup, the client revalidates cached evidence against the public key pinned in the package; without an approved pin it quarantines SIFT dynamic rules. See [the protocol](docs/PROTOCOL.md). Live remote updates remain intentionally disabled.
