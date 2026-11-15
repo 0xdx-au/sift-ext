@@ -8,7 +8,7 @@ The extension may consume signed release data only after an authorised public ve
 - Existing state anchors both sequence and SHA-256: same-sequence substitution is rejected unless the digest matches; lower sequences are always rejected.
 - Budgets: 8 MB signed payload, 2,048-character proof, 31-day maximum validity, bounded lists and rule groups.
 
-The public verifier, bounded downloader, policy compiler and staged installation coordinator now have unit tests. The coordinator keeps a local last-accepted policy snapshot and a durable installation journal, allowing an interrupted replacement to restore the prior accepted DNR rules. Startup reconciliation invokes the journal recovery path.
+The public verifier, bounded downloader, policy compiler and staged installation coordinator now have unit tests. The coordinator journals an attempted policy replacement and tracks the last accepted policy. This is a **testable internal mechanism**, not a completed authenticated recovery workflow: retained compiled rules must be reauthenticated against the pinned signing key before privileged startup restoration is enabled. Automatic startup restoration is deliberately disconnected.
 
 **This does not enable live remote feed updates.** No production public key is pinned, there is no approved signing identity or public CDN release, and the update coordinator is deliberately not scheduled or callable through the popup. The current client uses only packaged starter rules. Real-browser QA for signed-update installation, quota failures and restart recovery must still pass before automatic updates are enabled.
 
