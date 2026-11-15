@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SIFT EXT — ADMINE</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <picture class="brand-mark">
+      <source media="(prefers-color-scheme: dark)" srcset="brand/admine-mark.svg">
+      <img src="brand/admine-mark-light.svg" alt="" width="60" height="60" aria-hidden="true">
+    </picture>
+    <div class="brand-copy">
+      <p class="eyebrow">ADMINE / DIGITAL LABORATORY</p>
+      <h1>SIFT <span>EXT</span></h1>
+      <p class="tagline">Less noise. More signal.</p>
+    </div>
+  </header>
+  <main>
+    <section class="line">
+      <div><span class="row-heading">01 / Browser</span><strong>Request protection</strong><small>Bundled local starter rules</small></div>
+      <button id="toggle" aria-pressed="false" disabled>Checking…</button>
+    </section>
+    <section class="line">
+      <div><span class="row-heading">02 / Intelligence</span><strong>Signed policy feed</strong><small>No approved production key installed</small></div>
+      <span class="muted">Not active</span>
+    </section>
+    <section class="cleaner">
+      <label for="link">03 / Clean a link locally</label>
+      <input id="link" type="url" spellcheck="false" autocomplete="off" placeholder="https://example.com/?utm_source=…" aria-describedby="guidance">
+      <p id="guidance">Manual only. Login, payment, invitation and signed links remain unchanged.</p>
+      <div class="actions"><button id="clean">Clean link</button><button id="copy" disabled>Copy result</button></div>
+      <p id="result" role="status" aria-live="polite"></p>
+    </section>
+    <p class="fine">Local-only preview. No browser history upload; signed updates and cross-browser certification not yet active.</p>
+  </main>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
