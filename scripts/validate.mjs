@@ -20,7 +20,13 @@ for (const rule of rules) {
   assert.ok(!rule.condition.resourceTypes.includes('main_frame'));
   assert.ok(rule.condition.requestDomains.length < 100);
 }
-for (const path of ['src/background.js','src/popup.js','src/url-cleaner.mjs','src/popup.html','src/popup.css']) {
+for (const path of ['src/background.js','src/popup.js','src/url-cleaner.mjs','src/popup.html','src/popup.css','src/brand/admine-mark.svg','src/brand/admine-mark-light.svg']) {
   assert.ok((await readFile(new URL('../' + path, import.meta.url))).length > 0, path);
 }
 console.log('SIFT EXT starter manifest and resource validation passed');
+
+for (const file of ['admine-mark.svg','admine-mark-light.svg']) {
+  const source = await readFile(new URL('../src/brand/' + file, import.meta.url), 'utf8');
+  assert.ok(source.includes('M116 22 H140 L240 228'), 'Use the real ADMINE contour-A silhouette');
+  assert.ok(!/<script|<foreignObject|https?:\/\//i.test(source), 'Logo assets must be local and inert');
+}
