@@ -28,5 +28,5 @@ console.log('SIFT EXT starter manifest and resource validation passed');
 for (const file of ['admine-mark.svg','admine-mark-light.svg']) {
   const source = await readFile(new URL('../src/brand/' + file, import.meta.url), 'utf8');
   assert.ok(source.includes('M116 22 H140 L240 228'), 'Use the real ADMINE contour-A silhouette');
-  assert.ok(!/<script|<foreignObject|https?:\/\//i.test(source), 'Logo assets must be local and inert');
+  assert.ok(!/<script|<foreignObject|(?:href|src)\s*=\s*["']https?:\/\//i.test(source), 'Logo assets must be local and inert');
 }
