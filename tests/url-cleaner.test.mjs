@@ -19,7 +19,8 @@ test('preserves query duplicates, case-sensitive application values and fragment
   assert.equal(cleanTrackingUrl('https://example.org/?a=1&a=2&UTM_MEDIUM=c#top').value,
     'https://example.org/?a=1&a=2#top');
   assert.equal(cleanTrackingUrl('https://example.org/?ref=keep').changed,false);
-  assert.equal(cleanTrackingUrl('https://example.org/?bad=%zz&utm_source=x').changed,true);
+  assert.equal(cleanTrackingUrl('https://example.org/?bad=%zz&utm_source=x').changed,false);
+  assert.equal(cleanTrackingUrl('https://example.org/#fragment?utm_source=x').changed,false);
 });
 test('rejects non-web schemes, malformed URLs and credentials', () => {
   for (const url of ['javascript:alert(1)','garbage','https://user:pass@example.org/?utm_source=x']) {

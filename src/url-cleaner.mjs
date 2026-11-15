@@ -21,12 +21,13 @@ export function cleanTrackingUrl(input) {
   if (SENSITIVE_PATH.test(parsed.pathname))
     return { changed: false, value: input, reason: 'sensitive-path' };
   const question = input.indexOf('?');
-  if (question < 0) return { changed: false, value: input, reason: 'no-query' };
+  const firstFragment = input.indexOf('#');
+  if (question < 0 || (firstFragment >= 0 && question > firstFragment)) return { changed: false, value: input, reason: 'no-query' };
   const fragment = input.indexOf('#', question);
   const raw = input.slice(question + 1, fragment < 0 ? undefined : fragment);
   const segments = raw.split('&');
   const keys = segments.map((segment) => decodeKey(segment.split('=', 1)[0]));
-  if (keys.includes(null) || keys.some((key) => SENSITIVE.test(key)))
+  if (keys.includes(null) || segments.some((segment) => { try { decodeURIComponent(segment.replace(/\\+/g, ' ')); return false; } catch { return true; } }) || keys.some((key) => SENSITIVE.test(key)))
     return { changed: false, value: input, reason: 'sensitive-or-ambiguous-query' };
   const filtered = segments.filter((_, i) => !TRACKING.has(keys[i]));
   if (filtered.length === segments.length)
