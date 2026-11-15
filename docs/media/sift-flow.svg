@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="380" viewBox="0 0 1400 380" role="img" aria-labelledby="title desc">
+<title id="title">SIFT EXT trust boundaries</title><desc id="desc">A four-stage architecture diagram: private source ingestion, offline signing, public signed release, and a public client that validates before compiling browser rules. Signed distribution is not yet live.</desc>
+<defs>
+ <linearGradient id="surface" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0c151a"/><stop offset="1" stop-color="#112624"/></linearGradient>
+ <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0 1 L7 4 L0 7" fill="none" stroke="#70d6c1" stroke-width="1.5"/></marker>
+</defs>
+<rect x="1" y="1" width="1398" height="378" rx="16" fill="url(#surface)" stroke="#34615b" stroke-width="2"/>
+<text x="42" y="46" font-family="Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="3" fill="#7ce2cc">THE TRUST PATH</text>
+<text x="42" y="76" font-family="Arial, sans-serif" font-size="17" fill="#b6ccc7">Data may be public. Authority comes from a verified signature.</text>
+<g font-family="Arial, sans-serif">
+ <rect x="38" y="117" width="282" height="168" rx="15" fill="#142529" stroke="#4f7971"/>
+ <text x="61" y="145" fill="#84d7c6" font-size="13" font-weight="700" letter-spacing="2">01 / PRIVATE</text>
+ <text x="61" y="189" fill="#f4faf8" font-size="24" font-weight="700">Feed compiler</text>
+ <text x="61" y="221" fill="#aebfbc" font-size="16">Constrained rules, attribution,</text>
+ <text x="61" y="245" fill="#aebfbc" font-size="16">coverage checks</text>
+
+ <rect x="385" y="117" width="282" height="168" rx="15" fill="#142529" stroke="#4f7971"/>
+ <text x="408" y="145" fill="#84d7c6" font-size="13" font-weight="700" letter-spacing="2">02 / OFFLINE</text>
+ <text x="408" y="189" fill="#f4faf8" font-size="24" font-weight="700">Release signing</text>
+ <text x="408" y="221" fill="#aebfbc" font-size="16">Ed25519 signing identity</text>
+ <text x="408" y="245" fill="#aebfbc" font-size="16">kept outside GitHub + CI</text>
+
+ <rect x="732" y="117" width="282" height="168" rx="15" fill="#142529" stroke="#b49b63" stroke-dasharray="8 6"/>
+ <text x="755" y="145" fill="#e4c48d" font-size="13" font-weight="700" letter-spacing="2">03 / PLANNED</text>
+ <text x="755" y="189" fill="#f4faf8" font-size="24" font-weight="700">Signed public feed</text>
+ <text x="755" y="221" fill="#aebfbc" font-size="16">Versioned release bytes</text>
+ <text x="755" y="245" fill="#aebfbc" font-size="16">Not deployed yet</text>
+
+ <rect x="1079" y="117" width="282" height="168" rx="15" fill="#15312f" stroke="#69d3bc" stroke-width="2"/>
+ <text x="1102" y="145" fill="#84d7c6" font-size="13" font-weight="700" letter-spacing="2">04 / PUBLIC CLIENT</text>
+ <text x="1102" y="189" fill="#f4faf8" font-size="24" font-weight="700">SIFT EXT</text>
+ <text x="1102" y="221" fill="#aebfbc" font-size="16">Verify, compile, apply</text>
+ <text x="1102" y="245" fill="#aebfbc" font-size="16">Chromium DNR rules</text>
+</g>
+<g stroke="#70d6c1" fill="none" stroke-width="2.5" marker-end="url(#arrow)">
+ <path d="M328 201 H377"/>
+ <path d="M675 201 H724"/>
+ <path d="M1022 201 H1071" stroke-dasharray="5 6"/>
+</g>
+<path d="M40 317 H1360" stroke="#40665e"/>
+<text x="42" y="345" font-family="Arial, sans-serif" font-size="16" fill="#95c8bc">VALID SIGNATURE + VALID POLICY + APPROVED KEY</text>
+<text x="1359" y="345" text-anchor="end" font-family="Arial, sans-serif" font-size="16" fill="#e3bc78">Otherwise: no dynamic update</text>
+</svg>
