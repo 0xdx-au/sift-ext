@@ -4,6 +4,7 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve, join } from 'node:path';
 import assert from 'node:assert/strict';
+import {generateKeyPairSync, sign, createHash} from 'node:crypto';
 import { compileForChromium } from '../src/intelligence/compile.mjs';
 
 const visits = [];
@@ -113,6 +114,78 @@ try {
   await popup.locator('#clean').click();
   assert.equal(await popup.locator('#link').inputValue(),'https://example.org/?q=secure');
   report('popup-resume-and-manual-clean','pass');
+
+  // Test-only disposable signer: this does not change the package's null trust pin,
+  // store any private key, or contact the live SIFT endpoint.
+  const temporary=generateKeyPairSync('ed25519');
+  const pinned={keyId:'installed-browser-fixture',
+    publicKeyBase64:temporary.publicKey.export({format:'der',type:'spki'}).subarray(-32).toString('base64')};
+  const signedPolicy={
+    format:'admine.network-policy.v1',
+    sources:[{id:'fixture',name:'Fixture',url:'https://example.org/feed',license:'test'}],
+    groups:[{effect:'block',important:false,
+      match:{resourceTypes:['image'],domainType:'thirdParty'},
+      sources:['fixture'],domains:['signed-tracker.example']}],
+    stats:{totalLines:1,supportedLines:1,skippedLines:0,duplicateLines:0,domainCount:1,groupCount:1}
+  };
+  const testNow=Date.now();
+  const release={format:'admine.sift.release.v1',keyId:pinned.keyId,sequence:7,
+    issuedAt:new Date(testNow-5000).toISOString(),
+    expiresAt:new Date(testNow+86400000).toISOString(),policy:signedPolicy};
+  const signedBytes=Buffer.from(JSON.stringify(release)+'\n');
+  const proof=JSON.stringify({format:'admine.sift.signature.v1',keyId:pinned.keyId,
+    length:signedBytes.length,sha256:createHash('sha256').update(signedBytes).digest('hex'),
+    signature:sign(null,signedBytes,temporary.privateKey).toString('base64')});
+  const signedArgs={pin:pinned,payload:signedBytes.toString('utf8'),proof,now:testNow};
+  const installedSigned=await popup.evaluate(async({pin,payload,proof,now})=>{
+    const {applyVerifiedFeed}=await import(chrome.runtime.getURL('src/intelligence/update.mjs'));
+    return applyVerifiedFeed({
+      dnr:chrome.declarativeNetRequest,local:chrome.storage.local
+    },{pin,now,acquire:async()=>({
+      rawBytes:new TextEncoder().encode(payload),signatureText:proof
+    })});
+  },signedArgs);
+  assert.equal(installedSigned.installed,1);
+  const signedBlocked=await requestImage(page,'http://signed-tracker.example/verified');
+  assert.equal(signedBlocked?.type,'failure','Signed-release DNR rule did not block');
+  assert.match(signedBlocked.error||'',/ERR_BLOCKED_BY_CLIENT/);
+  report('verified-signed-feed-install-block','pass');
+
+  const restoredSigned=await popup.evaluate(async ({pin,now})=>{
+    const {recoverPendingFeed}=await import(chrome.runtime.getURL('src/intelligence/update.mjs'));
+    // Simulate accidental injection of a competing dynamic rule. The signed
+    // cache must be verified afresh and used as the only recovery authority.
+    await chrome.declarativeNetRequest.updateDynamicRules({
+      removeRuleIds:[1000],
+      addRules:[{id:1000,priority:40,action:{type:'allow'},
+        condition:{requestDomains:['signed-tracker.example'],resourceTypes:['image']}}]
+    });
+    return recoverPendingFeed({
+      dnr:chrome.declarativeNetRequest,local:chrome.storage.local
+    },{pin,now});
+  },{pin:pinned,now:testNow});
+  assert.equal(restoredSigned.status,'verified');
+  assert.equal(restoredSigned.installed,1);
+  const reblocked=await requestImage(page,'http://signed-tracker.example/recovered');
+  assert.equal(reblocked?.type,'failure','Recovery did not restore the signed block');
+  assert.match(reblocked.error||'',/ERR_BLOCKED_BY_CLIENT/);
+  report('signed-cache-revalidation-restores-only-authenticated-rules','pass');
+
+  const quarantined=await popup.evaluate(async({pin,now})=>{
+    const {recoverPendingFeed,FEED_STATE_KEY}=await import(chrome.runtime.getURL('src/intelligence/update.mjs'));
+    const obj=await chrome.storage.local.get(FEED_STATE_KEY);
+    obj[FEED_STATE_KEY].accepted.payload=obj[FEED_STATE_KEY].accepted.payload
+      .replace('signed-tracker.example','forged-tracker.example');
+    await chrome.storage.local.set(obj);
+    const status=await recoverPendingFeed({
+      dnr:chrome.declarativeNetRequest,local:chrome.storage.local
+    },{pin,now});
+    return {status,remaining:(await chrome.declarativeNetRequest.getDynamicRules()).length};
+  },{pin:pinned,now:testNow});
+  assert.equal(quarantined.status.status,'quarantined');
+  assert.equal(quarantined.remaining,0);
+  report('tampered-signed-cache-quarantine','pass');
+
 } catch(e) {
   failed=true;
   report('browser-e2e','fail',String(e.stack||e));
