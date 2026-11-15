@@ -1,0 +1,41 @@
+name: Repository hygiene
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository without persisted credentials
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Check rights and disclosure files
+        run: |
+          set -euo pipefail
+          test -s LICENSE
+          test -s COMMERCIAL.md
+          test -s SECURITY.md
+      - name: Check tracked secret file names
+        run: |
+          set -euo pipefail
+          if git ls-files | grep -E -i '(^|/)(\.env($|\.)|secrets?/|private/)|\.(pem|key|p8|p12|pfx)$'; then
+            echo 'Potential private material in version control' >&2
+            exit 1
+          fi
+      - name: Check obvious credential patterns
+        run: |
+          set -euo pipefail
+          if git grep -n -E '(-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----|github_pat_[A-Za-z0-9_]{20,}|ghp_[A-Za-z0-9]{20,})' -- . ':!*.md'; then
+            echo 'Potential credential exposed; halt release and investigate' >&2
+            exit 1
+          fi
