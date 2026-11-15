@@ -1,5 +1,4 @@
 import { readProtectionStatus, setProtectionEnabled } from './protection/state.mjs';
-import { recoverPendingFeed } from './intelligence/update.mjs';
 
 const api = {
   dnr: chrome.declarativeNetRequest,
@@ -17,7 +16,6 @@ function serial(task) {
 async function reconcile() {
   await api.local.setAccessLevel({ accessLevel: 'TRUSTED_CONTEXTS' });
   await api.session.setAccessLevel({ accessLevel: 'TRUSTED_CONTEXTS' });
-  await recoverPendingFeed(api);
   const saved = await api.local.get('enabled');
   return setProtectionEnabled(api, saved.enabled !== false);
 }
