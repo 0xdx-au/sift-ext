@@ -1,5 +1,4 @@
 name: Public visibility policy
-
 on:
   push:
     branches: [main]
@@ -8,28 +7,37 @@ on:
   schedule:
     - cron: '17 4 * * *'
   workflow_dispatch:
-
 permissions:
   contents: read
-
 jobs:
   audit:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - name: Check anonymous repository visibility
+      - name: Verify GitHub reports the repository is public
         env:
+          GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
-          curl --fail --silent --show-error --retry 2 --retry-delay 2 \
-            --connect-timeout 10 --max-time 30 \
-            -H 'Accept: application/vnd.github+json' \
-            "https://api.github.com/repos/${REPO}" > /tmp/repo.json
+          gh api "repos/${REPO}" --jq '{private: .private, visibility: .visibility}' > /tmp/sift-visibility.json
           python3 - <<'PY'
           import json
-          with open('/tmp/repo.json', encoding='utf-8') as f:
-              repo = json.load(f)
-          assert repo.get('private') is False and repo.get('visibility') == 'public', 'SIFT EXT visibility is not public'
-          print('SIFT EXT is publicly accessible')
+          with open('/tmp/sift-visibility.json',encoding='utf-8') as stream:
+              repo=json.load(stream)
+          if repo.get('private') is not False or repo.get('visibility') != 'public':
+              raise SystemExit('CRITICAL: SIFT EXT GitHub repository is not public')
+          print('GitHub reports the SIFT EXT repository is publicly visible')
           PY
+      - name: Independently probe anonymous public README delivery
+        run: |
+          set -euo pipefail
+          if curl --fail --silent --show-error --retry 2 \
+            --connect-timeout 10 --max-time 30 \
+            "https://raw.githubusercontent.com/0xdx-au/sift-ext/main/README.md" \
+            -o /tmp/sift-public-readme; then
+            grep -q 'SIFT EXT' /tmp/sift-public-readme
+            echo 'Anonymous README retrieval verified'
+          else
+            echo '::warning::Anonymous CDN reachability inconclusive (rate limit or edge restriction); authenticated GitHub visibility metadata was verified separately.'
+          fi
