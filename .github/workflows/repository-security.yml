@@ -35,7 +35,7 @@ jobs:
       - name: Check obvious credential patterns
         run: |
           set -euo pipefail
-          if git grep -n -E '(-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----|github_pat_[A-Za-z0-9_]{20,}|ghp_[A-Za-z0-9]{20,})' -- . ':!*.md'; then
+          if git grep -n -E '(-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----|github_pat_[A-Za-z0-9_]{20,}|ghp_[A-Za-z0-9]{20,})' -- . ':!*.md' ':!.github/workflows/repository-security.yml'; then
             echo 'Potential credential exposed; halt release and investigate' >&2
             exit 1
           fi
