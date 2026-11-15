@@ -40,3 +40,33 @@ test('DNR failure retains prior rules and reports error',async()=>{
  await assert.rejects(installDynamicRules(dnr,compileForChromium(policy).rules),/quota exhausted/);
  assert.equal((await dnr.getDynamicRules())[0].condition.requestDomains[0],'old.example');
 });
+
+test('Chrome-normalized object ordering is accepted without weakening rule semantics',async()=>{
+ const proposed=compileForChromium(policy).rules;
+ let installed=[];
+ const dnr={
+  getDynamicRules:async()=>installed.map(r=>({
+   action:{type:r.action.type},
+   condition:{domainType:r.condition.domainType,requestDomains:[...r.condition.requestDomains].reverse(),resourceTypes:[...r.condition.resourceTypes]},
+   id:r.id,priority:r.priority
+  })),
+  updateDynamicRules:async({removeRuleIds,addRules})=>{
+   installed=installed.filter(r=>!removeRuleIds.includes(r.id)).concat(structuredClone(addRules));
+  }
+ };
+ const status=await installDynamicRules(dnr,proposed);
+ assert.equal(status.installed,3);
+});
+test('actual change to effective DNR semantics still fails verification and restores',async()=>{
+ const proposed=compileForChromium(policy).rules;
+ let installed=[{id:1000,priority:40,action:{type:'block'},condition:{requestDomains:['old.example'],resourceTypes:['script']}}];
+ let falsify=false;
+ const dnr={
+  getDynamicRules:async()=>falsify ? installed.map(r=>({...structuredClone(r),action:{type:'allow'}})) : structuredClone(installed),
+  updateDynamicRules:async({removeRuleIds,addRules})=>{
+   installed=installed.filter(r=>!removeRuleIds.includes(r.id)).concat(structuredClone(addRules));
+   falsify=true;
+  }
+ };
+ await assert.rejects(installDynamicRules(dnr,proposed),/installed rules differ/);
+});
