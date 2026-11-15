@@ -1,0 +1,42 @@
+name: Security assurance
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '37 5 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-audit:
+    name: Source security gate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Audit tracked source, action pins and permissions
+        run: python3 scripts/security_audit.py
+  branch-controls:
+    name: Default-branch protection monitor
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Verify GitHub reports main is protected
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --retry 2 --max-time 20 \
+            -H 'Accept: application/vnd.github+json' \
+            "https://api.github.com/repos/0xdx-au/sift-ext/branches/main" > /tmp/branch.json
+          python3 - <<'PY'
+          import json
+          with open('/tmp/branch.json', encoding='utf-8') as f:
+              branch=json.load(f)
+          if branch.get('protected') is not True:
+              raise SystemExit('CRITICAL: main is unprotected; configure an Active GitHub ruleset.')
+          print('GitHub reports main is protected')
+          PY
