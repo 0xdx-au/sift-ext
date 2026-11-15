@@ -24,7 +24,7 @@ export async function installDynamicRules(dnr,candidate){
  if(snapshotSignature(after)!==snapshotSignature(candidate)){
    try{await dnr.updateDynamicRules({removeRuleIds:after.map(r=>r.id),addRules:before});}
    catch{throw Error('SIFT: installation mismatch and restoration not confirmed');}
-   throw Error('SIFT: installed rules differ; previous rules restored');
+   throw Error('SIFT: installed rules differ; previous rules restored. Diagnostic ' + JSON.stringify({ expected:candidate[0], observed:after[0] }).slice(0,1800));
  }
  return {installed:after.length,previous:before.length};
 }
