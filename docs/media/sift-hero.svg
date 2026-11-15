@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="500" viewBox="0 0 1400 500" role="img" aria-labelledby="title desc">
+<title id="title">ADMINE SIFT EXT — Less noise, more signal</title>
+<desc id="desc">Dark teal topographic signal illustration surrounding an abstract ADMINE mark with SIFT EXT branding. Engineering preview, not an extension screenshot.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#0b1419"/><stop offset="65%" stop-color="#101d21"/><stop offset="100%" stop-color="#102b2c"/>
+  </linearGradient>
+  <radialGradient id="glow" cx="76%" cy="48%" r="68%">
+    <stop offset="0%" stop-color="#3de0c4" stop-opacity=".22"/><stop offset="65%" stop-color="#3de0c4" stop-opacity=".025"/><stop offset="100%" stop-color="#3de0c4" stop-opacity="0"/>
+  </radialGradient>
+  <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+    <path d="M 32 0 H 0 V 32" fill="none" stroke="#94f7e3" stroke-width="0.7" opacity=".06"/>
+  </pattern>
+  <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b1ffee"/><stop offset="1" stop-color="#32bfa6"/></linearGradient>
+  <clipPath id="clip"><rect x="1" y="1" width="1398" height="498" rx="19"/></clipPath>
+</defs>
+<g clip-path="url(#clip)">
+<rect width="1400" height="500" fill="url(#bg)"/>
+<rect width="1400" height="500" fill="url(#grid)"/>
+<rect width="1400" height="500" fill="url(#glow)"/>
+<path d="M 666 60 C 800 84 865 36 986 60 S 1190 75 1400 18" fill="none" stroke="#5cd5c2" stroke-opacity="0.180" stroke-width="1"/>
+<path d="M 666 98 C 800 122 865 74 986 98 S 1190 113 1400 56" fill="none" stroke="#5cd5c2" stroke-opacity="0.192" stroke-width="1"/>
+<path d="M 666 136 C 800 160 865 112 986 136 S 1190 151 1400 94" fill="none" stroke="#5cd5c2" stroke-opacity="0.204" stroke-width="1"/>
+<path d="M 666 174 C 800 198 865 150 986 174 S 1190 189 1400 132" fill="none" stroke="#5cd5c2" stroke-opacity="0.216" stroke-width="1"/>
+<path d="M 666 212 C 800 236 865 188 986 212 S 1190 227 1400 170" fill="none" stroke="#5cd5c2" stroke-opacity="0.228" stroke-width="1"/>
+<path d="M 666 250 C 800 274 865 226 986 250 S 1190 265 1400 208" fill="none" stroke="#5cd5c2" stroke-opacity="0.240" stroke-width="1"/>
+<path d="M 666 288 C 800 312 865 264 986 288 S 1190 303 1400 246" fill="none" stroke="#5cd5c2" stroke-opacity="0.252" stroke-width="1"/>
+<path d="M 666 326 C 800 350 865 302 986 326 S 1190 341 1400 284" fill="none" stroke="#5cd5c2" stroke-opacity="0.264" stroke-width="1"/>
+<ellipse cx="1080" cy="240" rx="92" ry="67" fill="none" stroke="#61dcc4" stroke-opacity="0.380" stroke-width="1.5" transform="rotate(-19 1080 240)"/>
+<ellipse cx="1080" cy="240" rx="108" ry="79" fill="none" stroke="#61dcc4" stroke-opacity="0.362" stroke-width="1.5" transform="rotate(-19 1080 240)"/>
+<ellipse cx="1080" cy="240" rx="124" ry="91" fill="none" stroke="#61dcc4" stroke-opacity="0.344" stroke-width="1.5" transform="rotate(-19 1080 240)"/>
+<ellipse cx="1080" cy="240" rx="140" ry="103" fill="none" stroke="#61dcc4" stroke-opacity="0.326" stroke-width="1.5" transform="rotate(-19 1080 240)"/>
+<ellipse cx="1080" cy="240" rx="156" ry="115" fill="none" stroke="#61dcc4" stroke-opacity="0.308" stroke-width="1.5" transform="rotate(-19 1080 240)"/>
+<ellipse cx="1080" cy="240" rx="172" ry="127" fill="none" stroke="#61dcc4" stroke-opacity="0.290" stroke-width="1.5" transform="rotate(-19 1080 240)"/>
+<ellipse cx="1080" cy="240" rx="188" ry="139" fill="none" stroke="#61dcc4" stroke-opacity="0.272" stroke-width="1.5" transform="rotate(-19 1080 240)"/>
+<ellipse cx="1080" cy="240" rx="204" ry="151" fill="none" stroke="#61dcc4" stroke-opacity="0.254" stroke-width="1.5" transform="rotate(-19 1080 240)"/>
+<ellipse cx="1080" cy="240" rx="220" ry="163" fill="none" stroke="#61dcc4" stroke-opacity="0.236" stroke-width="1.5" transform="rotate(-19 1080 240)"/>
+<ellipse cx="1080" cy="240" rx="236" ry="175" fill="none" stroke="#61dcc4" stroke-opacity="0.218" stroke-width="1.5" transform="rotate(-19 1080 240)"/>
+<ellipse cx="1080" cy="240" rx="252" ry="187" fill="none" stroke="#61dcc4" stroke-opacity="0.200" stroke-width="1.5" transform="rotate(-19 1080 240)"/>
+<ellipse cx="1080" cy="240" rx="268" ry="199" fill="none" stroke="#61dcc4" stroke-opacity="0.182" stroke-width="1.5" transform="rotate(-19 1080 240)"/>
+<ellipse cx="1080" cy="240" rx="284" ry="211" fill="none" stroke="#61dcc4" stroke-opacity="0.164" stroke-width="1.5" transform="rotate(-19 1080 240)"/>
+<ellipse cx="1080" cy="240" rx="300" ry="223" fill="none" stroke="#61dcc4" stroke-opacity="0.146" stroke-width="1.5" transform="rotate(-19 1080 240)"/>
+<path d="M805 345 C 945 285 1140 324 1370 220 M760 405 C940 342 1150 382 1405 285" fill="none" stroke="#74e9d4" stroke-width="1.7" stroke-opacity=".4"/>
+<circle cx="1080" cy="240" r="7" fill="#8df8e3"/><circle cx="1080" cy="240" r="21" fill="none" stroke="#8df8e3" stroke-opacity=".53" stroke-width="2"/>
+<circle cx="864" cy="180" r="4" fill="#79f4d9"/><circle cx="1266" cy="332" r="4" fill="#79f4d9"/>
+<path d="M864 180 L1080 240 L1266 332" fill="none" stroke="#7eebd8" opacity=".3" stroke-dasharray="5 9"/>
+<rect x="50" y="46" width="176" height="38" rx="19" fill="#132f2e" stroke="#3c9f91" stroke-opacity=".65"/>
+<circle cx="73" cy="65" r="5" fill="#69e6cd"/>
+<text x="90" y="70" fill="#a5e8db" font-size="16" font-weight="700" letter-spacing="2" font-family="Arial, sans-serif">ADMINE / LABS</text>
+<g transform="translate(62 140)" fill="none" stroke-linejoin="round" stroke-linecap="round">
+ <path d="M0 118 L69 2 L138 118" stroke="#d9f3ec" stroke-width="10"/>
+ <path d="M30 79 H107" stroke="url(#accent)" stroke-width="11"/>
+ <path d="M73 104 L106 46" stroke="#69dfc7" stroke-width="9"/>
+ <circle cx="138" cy="118" r="8" fill="#6fe5ce" stroke="none"/>
+</g>
+<text x="243" y="236" fill="#f1f8f7" font-family="Arial, Helvetica, sans-serif" font-size="110" font-weight="800" letter-spacing="-7">SIFT</text>
+<text x="244" y="305" fill="#78e4ce" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700" letter-spacing="9">EXT</text>
+<path d="M64 342 H585" stroke="#3f6d69" stroke-width="2"/>
+<text x="65" y="388" fill="#f1f7f4" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" letter-spacing=".3">LESS NOISE. MORE SIGNAL.</text>
+<text x="67" y="423" fill="#a7c8c1" font-family="Arial, Helvetica, sans-serif" font-size="18">Auditable browser protection, built around proof.</text>
+<text x="67" y="468" fill="#6d968f" font-family="monospace" font-size="14" letter-spacing="2">01 / VERIFY   02 / COMPILE   03 / ENFORCE</text>
+<g transform="translate(1115 50)">
+ <rect width="231" height="34" rx="17" fill="#17312e" stroke="#397b72"/>
+ <text x="115" y="22" text-anchor="middle" fill="#8be5d2" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="2">ENGINEERING PREVIEW</text>
+</g>
+<path d="M1320 420 l18 -18 m-9 0 l9 0 l0 9" stroke="#5cd8bd" stroke-width="2" fill="none"/>
+</g>
+<rect x="1" y="1" width="1398" height="498" rx="19" fill="none" stroke="#39635f" stroke-opacity=".8" stroke-width="2"/>
+</svg>
