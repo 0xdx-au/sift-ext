@@ -1,6 +1,6 @@
 import { chromium } from 'playwright';
 import { createServer } from 'node:http';
-import { mkdtemp, rm } from 'node:fs/promises';
+import { mkdtemp, mkdir, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve, join } from 'node:path';
 import assert from 'node:assert/strict';
@@ -41,7 +41,7 @@ async function requestImage(page, url) {
 }
 try {
   context = await chromium.launchPersistentContext(profile,{
-    channel:'chromium',headless:true,
+    channel:'chromium',headless:true,colorScheme:'dark',
     args:['--disable-extensions-except=' + resolve('.'),'--load-extension=' + resolve('.')],
     ignoreHTTPSErrors:false
   });
@@ -114,6 +114,13 @@ try {
   await popup.locator('#clean').click();
   assert.equal(await popup.locator('#link').inputValue(),'https://example.org/?q=secure');
   report('popup-resume-and-manual-clean','pass');
+  // Real installed-extension screenshot with only deterministic fixture data.
+  // No network browsing history or signing secrets are captured.
+  await mkdir('artifacts',{recursive:true});
+  await popup.locator('body').screenshot({
+    path:'artifacts/sift-popup-dark.png',animations:'disabled'
+  });
+  report('popup-screenshot','captured','artifacts/sift-popup-dark.png');
 
   // Test-only disposable signer: this does not change the package's null trust pin,
   // store any private key, or contact the live SIFT endpoint.
