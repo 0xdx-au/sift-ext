@@ -51,6 +51,11 @@ try {
   assert.ok(worker.url().startsWith('chrome-extension://'),'MV3 worker did not load');
   report('browser-version','observed',await worker.evaluate(()=>navigator.userAgent));
   const extensionId=new URL(worker.url()).hostname;
+  const manifest=await worker.evaluate(()=>chrome.runtime.getManifest());
+  assert.equal(manifest.incognito,'not_allowed','Incognito use must be disabled');
+  assert.equal(manifest.host_permissions,undefined,'No persistent host access');
+  report('incognito-and-host-permissions','pass');
+
   const page=await context.newPage();
   await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
   const allowedUrl=origin+'/allowed.svg';

@@ -20,6 +20,10 @@ export function cleanTrackingUrl(input) {
     return { changed: false, value: input, reason: 'unsupported-url' };
   if (SENSITIVE_PATH.test(parsed.pathname))
     return { changed: false, value: input, reason: 'sensitive-path' };
+  // Escaped path segments can conceal authentication or signed-link routes.
+  // Reject them instead of guessing how the application decodes its path.
+  if (parsed.pathname.includes('%'))
+    return { changed: false, value: input, reason: 'ambiguous-path' };
   const question = input.indexOf('?');
   const firstFragment = input.indexOf('#');
   if (question < 0 || (firstFragment >= 0 && question > firstFragment)) return { changed: false, value: input, reason: 'no-query' };

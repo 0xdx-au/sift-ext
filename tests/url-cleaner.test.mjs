@@ -27,3 +27,16 @@ test('rejects non-web schemes, malformed URLs and credentials', () => {
     assert.equal(cleanTrackingUrl(url).changed,false);
   }
 });
+
+test('refuses encoded paths which may hide login, callback or signed routes', () => {
+  for (const url of [
+    'https://example.org/oauth%2Fcallback?utm_source=x',
+    'https://example.org/%6cogin?utm_medium=x',
+    'https://example.org/auth%252Fcallback?gclid=x',
+    'https://example.org/files/%2fsecret?utm_campaign=x',
+    'https://example.org/%zz?fbclid=x'
+  ]) {
+    const result = cleanTrackingUrl(url);
+    assert.equal(result.changed, false, url);
+  }
+});

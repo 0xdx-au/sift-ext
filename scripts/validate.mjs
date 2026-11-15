@@ -7,6 +7,7 @@ assert.equal(manifest.manifest_version, 3);
 assert.ok(Number(manifest.minimum_chrome_version) >= 156, 'Disallow unsupported legacy Chromium runtimes');
 assert.deepEqual(manifest.permissions, ['declarativeNetRequest','storage','activeTab']);
 assert.equal(manifest.host_permissions, undefined);
+assert.equal(manifest.incognito, 'not_allowed', 'No Incognito execution or persistence allowed');
 assert.equal(manifest.externally_connectable, undefined);
 assert.equal(SIGNING_PIN, null, 'Production key pin needs independently approved release gates');
 assert.equal(manifest.content_security_policy.extension_pages, "script-src 'self'; object-src 'self'");
