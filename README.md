@@ -20,7 +20,7 @@ Chrome, Edge and Brave share a Manifest V3 client with browser-specific validati
 
 This repo is **source-visible, rights reserved**. ADMINE retains its ability to sell and commercially license the client later. The code is not automatically offered under MIT, Apache-2.0 or another broad reuse licence simply because it is public.
 
-See [LICENSE](LICENSE), [COMMERCIAL.md](COMMERCIAL.md) and [SECURITY.md](SECURITY.md). Upstream filters and dependencies keep their own licences.
+See [LICENSE](LICENSE), [COMMERCIAL.md](COMMERCIAL.md), [SECURITY.md](SECURITY.md) and [HARDENING.md](HARDENING.md) for the unconfigured ruleset requirements. Upstream filters and dependencies keep their own licences.
 
 ## Trust model
 
