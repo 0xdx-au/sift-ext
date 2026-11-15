@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "SIFT EXT — ADMINE",
+  "version": "0.1.0",
+  "minimum_chrome_version": "101",
+  "description": "Conservative local browser request protection and manual tracking-link cleanup.",
+  "permissions": ["declarativeNetRequest", "storage", "activeTab"],
+  "background": { "service_worker": "src/background.js", "type": "module" },
+  "action": { "default_title": "SIFT EXT", "default_popup": "src/popup.html" },
+  "declarative_net_request": {
+    "rule_resources": [
+      { "id": "starter", "enabled": true, "path": "rules/starter.json" }
+    ]
+  },
+  "content_security_policy": { "extension_pages": "script-src 'self'; object-src 'self'" }
+}

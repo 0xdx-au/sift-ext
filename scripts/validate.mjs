@@ -1,0 +1,23 @@
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+const json = async (path) => JSON.parse(await readFile(new URL('../' + path, import.meta.url), 'utf8'));
+const manifest = await json('manifest.json');
+assert.equal(manifest.manifest_version, 3);
+assert.deepEqual(manifest.permissions, ['declarativeNetRequest','storage','activeTab']);
+assert.equal(manifest.host_permissions, undefined);
+assert.equal(manifest.externally_connectable, undefined);
+assert.equal(manifest.content_security_policy.extension_pages, "script-src 'self'; object-src 'self'");
+const resources = manifest.declarative_net_request.rule_resources;
+assert.equal(resources.length, 1);
+const rules = await json(resources[0].path);
+assert.equal(rules.length, 1);
+for (const rule of rules) {
+  assert.equal(rule.action.type, 'block');
+  assert.equal(rule.condition.domainType, 'thirdParty');
+  assert.ok(!rule.condition.resourceTypes.includes('main_frame'));
+  assert.ok(rule.condition.requestDomains.length < 100);
+}
+for (const path of ['src/background.js','src/popup.js','src/url-cleaner.mjs','src/popup.html','src/popup.css']) {
+  assert.ok((await readFile(new URL('../' + path, import.meta.url))).length > 0, path);
+}
+console.log('SIFT EXT starter manifest and resource validation passed');

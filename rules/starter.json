@@ -1,0 +1,12 @@
+[
+  {
+    "id": 100,
+    "priority": 10,
+    "action": { "type": "block" },
+    "condition": {
+      "requestDomains": ["doubleclick.net", "google-analytics.com", "scorecardresearch.com", "quantserve.com"],
+      "domainType": "thirdParty",
+      "resourceTypes": ["script", "image", "xmlhttprequest", "ping"]
+    }
+  }
+]

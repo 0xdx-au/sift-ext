@@ -1,0 +1,21 @@
+name: Client source checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Require Node 22+
+        run: node -e "if (Number(process.versions.node.split('.')[0]) < 22) process.exit(1)"
+      - run: npm run check
+      - run: npm test

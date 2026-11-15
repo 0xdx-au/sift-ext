@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SIFT EXT — ADMINE</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <div class="mark" aria-hidden="true">A<span>.</span></div>
+    <div><div class="eyebrow">ADMINE / SIFT</div><h1>Less noise.<br>More signal.</h1></div>
+  </header>
+  <main>
+    <section class="line"><div><strong>Request protection</strong><small>Bundled local starter rules</small></div><button id="toggle" aria-pressed="false" disabled>Checking…</button></section>
+    <section class="line"><div><strong>Signed intelligence</strong><small>No production signing pin installed</small></div><span class="muted">Not active</span></section>
+    <section class="cleaner">
+      <label for="link">Clean a link locally</label>
+      <input id="link" type="url" spellcheck="false" autocomplete="off" placeholder="https://example.com/?utm_source=…" aria-describedby="guidance">
+      <p id="guidance">Manual only. Sensitive authentication and signed links are left unchanged.</p>
+      <div class="actions"><button id="clean">Clean link</button><button id="copy" disabled>Copy result</button></div>
+      <p id="result" role="status" aria-live="polite"></p>
+    </section>
+    <p class="fine">No browsing history sent. No verified remote feed or cross-browser certification yet.</p>
+  </main>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
