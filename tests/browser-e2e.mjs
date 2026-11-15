@@ -132,6 +132,8 @@ try {
   report('ADMINE-popup-dark-brand','pass');
 
   await popup.emulateMedia({colorScheme:'light'});
+  await popup.waitForFunction(() => window.matchMedia('(prefers-color-scheme: light)').matches, null, {timeout:5000});
+  await popup.waitForFunction(() => document.querySelector('.brand-mark img')?.currentSrc.endsWith('/src/brand/admine-mark-light.svg'), null, {timeout:5000});
   rendered=await popup.evaluate(async()=>{
     const mark=document.querySelector('.brand-mark img');
     await mark.decode();
